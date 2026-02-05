@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>XOARENA — Private Arena</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+/* ===== RESET ===== */
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+background:#0b0b0c;
+color:#e8e6e3;
+font-family:Inter,sans-serif;
+overflow-x:hidden;
+}
+
+/* ===== GOLD TEXT ===== */
+.gold{
+background:linear-gradient(135deg,#c6a85a,#f5e6b3,#b89744);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+/* BG GLOW */
+body:before{
+content:"";
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at 20% 30%,#d4af3720,transparent 40%),
+radial-gradient(circle at 80% 70%,#d4af3715,transparent 40%);
+pointer-events:none;
+}
+
+/* ===== LAYOUT ===== */
+.wrap{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+padding:30px 20px;
+max-width:1200px;
+margin:auto;
+}
+
+/* HEADER */
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+font-family:"Playfair Display";
+font-size:20px;
+letter-spacing:3px;
+}
+
+.invite{
+border:1px solid #c6a85a;
+padding:5px 10px;
+font-size:11px;
+letter-spacing:2px;
+color:#c6a85a;
+}
+
+/* HERO */
+.hero{
+margin-top:40px;
+}
+
+.hero h1{
+font-family:"Playfair Display";
+font-size:42px;
+line-height:1.15;
+}
+
+.hero p{
+margin-top:20px;
+opacity:.75;
+font-size:15px;
+line-height:1.6;
+max-width:500px;
+}
+
+/* LINE */
+.line{
+width:60px;
+height:1px;
+background:linear-gradient(90deg,transparent,#c6a85a,transparent);
+margin:30px 0;
+}
+
+/* ===== COUNTDOWN (FIXED) ===== */
+.count{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:10px;
+max-width:420px;
+}
+
+.count div{
+text-align:center;
+padding:10px 5px;
+border:1px solid #c6a85a22;
+}
+
+.count strong{
+font-size:22px;
+color:#f5e6b3;
+display:block;
+}
+
+.count span{
+font-size:10px;
+letter-spacing:1px;
+opacity:.6;
+}
+
+/* FORM */
+.cta{
+margin-top:100px;
+display:flex;
+flex-direction:column;
+gap:12px;
+max-width:420px;
+}
+
+.cta input{
+background:transparent;
+border:1px solid #3a3320;
+padding:14px;
+color:#e8e6e3;
+width:100%;
+}
+
+.cta input:focus{
+outline:none;
+border-color:#c6a85a;
+}
+
+.cta button{
+background:linear-gradient(135deg,#c6a85a,#f5e6b3);
+border:none;
+padding:14px;
+font-weight:600;
+cursor:pointer;
+}
+
+/* FOOTER */
+.footer{
+margin-top:0px;
+font-size:11px;
+opacity:.4;
+display:flex;
+justify-content:space-between;
+flex-wrap:wrap;
+gap:10px;
+}
+
+/* XO DECOR */
+.xo{
+position:fixed;
+right:5%;
+bottom:5%;
+opacity:.05;
+font-size:140px;
+font-family:"Playfair Display";
+pointer-events:none;
+}
+
+/* ===== POPUP ===== */
+.popup{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.7);
+display:flex;
+justify-content:center;
+align-items:center;
+opacity:0;
+pointer-events:none;
+transition:.4s;
+padding:20px;
+}
+
+.popup.show{
+opacity:1;
+pointer-events:auto;
+}
+
+.popup-box{
+background:#111;
+border:1px solid #c6a85a55;
+padding:30px 25px;
+text-align:center;
+max-width:360px;
+width:100%;
+}
+
+.popup h2{
+font-family:"Playfair Display";
+margin-bottom:10px;
+}
+
+.popup button{
+margin-top:20px;
+padding:12px 18px;
+background:linear-gradient(135deg,#c6a85a,#f5e6b3);
+border:none;
+cursor:pointer;
+width:100%;
+}
+
+/* ===== DESKTOP ===== */
+@media(min-width:768px){
+
+.wrap{padding:50px 8%;}
+
+.hero h1{font-size:64px;}
+
+.count strong{font-size:30px;}
+
+.cta{flex-direction:row;}
+.cta button{width:200px;}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<!-- HEADER -->
+<div class="header">
+<div class="logo gold">XOARENA</div>
+<div class="invite">INVITE ONLY</div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+
+<h1>
+A private arena for<br>
+<span class="gold">strategic minds.</span>
+</h1>
+
+<p>
+XOARENA is a premium competitive Tic Tac Toe platform
+crafted for players who value precision and psychological play.
+</p>
+
+<div class="line"></div>
+
+<!-- COUNTDOWN -->
+<div class="count">
+<div><strong id="d">0</strong><span>DAYS</span></div>
+<div><strong id="h">0</strong><span>HOURS</span></div>
+<div><strong id="m">0</strong><span>MINUTES</span></div>
+<div><strong id="s">0</strong><span>SECONDS</span></div>
+</div>
+
+<!-- FORM -->
+<form id="xo-form" class="cta">
+<input type="email" name="email" placeholder="Enter email for invitation" required>
+<button type="submit">Request Access</button>
+</form>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+<div>© 2026 XOARENA</div>
+<div>Members-only platform</div>
+</div>
+
+</div>
+
+<div class="xo">XO</div>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+<div class="popup-box">
+<h2 class="gold">Thank You</h2>
+<p>Your request has been received.<br>Invitation will arrive soon.</p>
+<button onclick="closePopup()">Close</button>
+</div>
+</div>
+
+<!-- EMAILJS -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+
+/* EMAILJS */
+(function(){
+emailjs.init("_j4j0k7kyEqnizQ6P");
+})();
+
+/* FORM */
+document.getElementById("xo-form").addEventListener("submit",function(e){
+e.preventDefault();
+
+emailjs.send("service_4ra87dz","template_jyvivdu",{
+email:this.email.value,
+time:new Date().toLocaleString()
+}).then(()=>{
+document.getElementById("popup").classList.add("show");
+this.reset();
+});
+});
+
+function closePopup(){
+document.getElementById("popup").classList.remove("show");
+}
+
+/* COUNTDOWN */
+let launch=new Date();
+launch.setDate(launch.getDate()+30);
+
+function tick(){
+let now=new Date();
+let diff=launch-now;
+
+document.getElementById("d").innerText=Math.max(0,Math.floor(diff/86400000));
+document.getElementById("h").innerText=Math.max(0,Math.floor(diff/3600000)%24);
+document.getElementById("m").innerText=Math.max(0,Math.floor(diff/60000)%60);
+document.getElementById("s").innerText=Math.max(0,Math.floor(diff/1000)%60);
+}
+
+setInterval(tick,1000);
+tick();
+
+</script>
+
+</body>
+</html>
