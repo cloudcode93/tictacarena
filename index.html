@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<title>TicTacArena — Private Arena</title>
+<title>XOARENA — Private Arena</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 
-/* ===== RESET ===== */
+/* RESET */
 *{margin:0;padding:0;box-sizing:border-box;}
 
 body{
@@ -20,7 +20,7 @@ font-family:Inter,sans-serif;
 overflow-x:hidden;
 }
 
-/* ===== GOLD TEXT ===== */
+/* GOLD TEXT */
 .gold{
 background:linear-gradient(135deg,#c6a85a,#f5e6b3,#b89744);
 -webkit-background-clip:text;
@@ -38,7 +38,7 @@ radial-gradient(circle at 80% 70%,#d4af3715,transparent 40%);
 pointer-events:none;
 }
 
-/* ===== LAYOUT ===== */
+/* LAYOUT */
 .wrap{
 min-height:100vh;
 display:flex;
@@ -71,10 +71,46 @@ color:#c6a85a;
 }
 
 /* HERO */
-.hero{
-margin-top:40px;
+.hero{margin-top:40px;}
+
+/* ===== PREMIUM LAUNCHING BADGE ===== */
+
+.launching-wrap{margin-bottom:25px;}
+
+.launching{
+display:inline-block;
+position:relative;
+padding:10px 22px;
+border:1px solid rgba(212,175,55,0.5);
+letter-spacing:3px;
+font-size:12px;
+color:#f5e6b3;
+background:rgba(212,175,55,0.05);
+overflow:hidden;
 }
 
+.launching:before{
+content:"";
+position:absolute;
+top:0;
+left:-60%;
+width:40%;
+height:100%;
+background:linear-gradient(
+120deg,
+transparent,
+rgba(255,215,0,0.5),
+transparent
+);
+animation:shimmer 3.5s infinite;
+}
+
+@keyframes shimmer{
+0%{left:-60%}
+100%{left:140%}
+}
+
+/* HERO TEXT */
 .hero h1{
 font-family:"Playfair Display";
 font-size:42px;
@@ -97,11 +133,11 @@ background:linear-gradient(90deg,transparent,#c6a85a,transparent);
 margin:30px 0;
 }
 
-/* ===== COUNTDOWN (FIXED) ===== */
+/* COUNTDOWN */
 .count{
 display:grid;
 grid-template-columns:repeat(4,1fr);
-gap:10px;
+gap:12px;
 max-width:420px;
 }
 
@@ -125,7 +161,7 @@ opacity:.6;
 
 /* FORM */
 .cta{
-margin-top:100px;
+margin-top:35px;
 display:flex;
 flex-direction:column;
 gap:12px;
@@ -155,7 +191,7 @@ cursor:pointer;
 
 /* FOOTER */
 .footer{
-margin-top:0px;
+margin-top:40px;
 font-size:11px;
 opacity:.4;
 display:flex;
@@ -175,7 +211,7 @@ font-family:"Playfair Display";
 pointer-events:none;
 }
 
-/* ===== POPUP ===== */
+/* POPUP */
 .popup{
 position:fixed;
 inset:0;
@@ -217,7 +253,7 @@ cursor:pointer;
 width:100%;
 }
 
-/* ===== DESKTOP ===== */
+/* DESKTOP */
 @media(min-width:768px){
 
 .wrap{padding:50px 8%;}
@@ -229,6 +265,15 @@ width:100%;
 .cta{flex-direction:row;}
 .cta button{width:200px;}
 
+}
+
+/* MOBILE BADGE TWEAK */
+@media(max-width:768px){
+.launching{
+font-size:11px;
+padding:8px 16px;
+letter-spacing:2px;
+}
 }
 
 </style>
@@ -246,6 +291,10 @@ width:100%;
 
 <!-- HERO -->
 <div class="hero">
+
+<div class="launching-wrap">
+<div class="launching">LAUNCHING SOON</div>
+</div>
 
 <h1>
 A private arena for<br>
@@ -277,7 +326,7 @@ crafted for players who value precision and psychological play.
 
 <!-- FOOTER -->
 <div class="footer">
-<div>© 2026 XOARENA</div>
+<div>© 2026 TicTacArena</div>
 <div>Members-only platform</div>
 </div>
 
@@ -299,12 +348,12 @@ crafted for players who value precision and psychological play.
 
 <script>
 
-/* EMAILJS */
+/* EMAILJS INIT */
 (function(){
 emailjs.init("_j4j0k7kyEqnizQ6P");
 })();
 
-/* FORM */
+/* FORM SUBMIT */
 document.getElementById("xo-form").addEventListener("submit",function(e){
 e.preventDefault();
 
@@ -317,6 +366,7 @@ this.reset();
 });
 });
 
+/* POPUP CLOSE */
 function closePopup(){
 document.getElementById("popup").classList.remove("show");
 }
